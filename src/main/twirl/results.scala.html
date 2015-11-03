@@ -1,0 +1,49 @@
+@(results: List[moe.pizza.pilotquery.JavaPilot])
+
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+    <div class="vertical-center">
+        <div class="container">
+            <h1><center>Pizza Intel Database</center></h1>
+            <table class="table table-bordered sortable">
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Corporation</th>
+                    <th>Alliance</th>
+                    <th>Last Seen Ship</th>
+                    <th id="dateheader">Last Seen Date</th>
+                    <th>Last Seen System</th>
+                    <th>Last Seen Region</th>
+                </tr>
+                @for(r <- results) {
+                <tr>
+                    <td>@r._id</td>
+                    <td>@r.characterName</td>
+                    <td>@r.corporationName</td>
+                    <td>@r.allianceName</td>
+                    <td>@r.lastSeenShip</td>
+                    <td>@r.lastSeenDate</td>
+                    <td>@r.lastSeenSystem</td>
+                    <td>@r.lastSeenRegion</td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="http://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    </body>
+</html>

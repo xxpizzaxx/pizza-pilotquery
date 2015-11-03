@@ -1,0 +1,230 @@
+@(db: moe.pizza.pilotquery.data.PilotDB)
+
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/query-builder.default.min.css">
+    <link rel="stylesheet" href="/css/todc-bootstrap.min.css">
+</head>
+<body>
+    <div class="jumbotron vertical-center">
+        <div class="container">
+            <h1><center>Pizza Intel Database</center></h1>
+            <p><center>Now serving @db.countCharacters() characters across @db.countAlliances() alliances.</center></p>
+
+            <div id="builder" class="query-builder form-inline"></div>
+            <div class="btn-group">
+                <button class="btn btn-primary parse-mongo" data-target="builder">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- QueryBuilder -->
+    <script src="/static/js/jQuery.extendext.min.js"></script>
+    <script src="/static/js/query-builder.min.js"></script>
+
+    <!-- datepicker -->
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+var rules_plugins = {
+  condition: 'AND',
+  rules: [{
+        condition: 'OR',
+        rules: [{
+            id: 'lastSeenRegion',
+            operator: 'equal',
+            value: 'Delve'
+        },{
+            id: 'lastSeenRegion',
+            operator: 'equal',
+            value: 'Querious'
+        },{
+            id: 'lastSeenRegion',
+            operator: 'equal',
+            value: 'Aridia'
+        }]
+  },{
+    condition: 'OR',
+    rules: [{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Hel'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Aeon'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Nyx'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+	value: 'Wyvern'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Revenant'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Avatar'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Erebus'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Leviathan'
+    },{
+        id: 'lastSeenShip',
+        operator: 'equal',
+        value: 'Ragnarok'
+    }]
+  }]
+};
+
+$('#builder').queryBuilder({
+  plugins: [
+  ],
+
+  filters: [{
+    id: 'characterName',
+    label: 'Name',
+    type: 'string',
+  }, {
+    id: 'corporationName',
+    label: 'Corporation',
+    type: 'string'
+  }, {
+    id: 'allianceName',
+    label: 'Alliance',
+    type: 'string'
+  }, {
+    id: 'lastSeenShip',
+    label: 'Last Seen Ship',
+    type: 'string',
+    input: 'select',
+    values: [
+        "Hel",
+        "Aeon",
+        "Nyx",
+	"Wyvern",
+	"Revenant",
+        "Erebus",
+        "Avatar",
+        "Leviathan",
+        "Ragnarok"
+    ],
+    color: 'primary',
+    operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
+  }, {
+    id: 'lastSeenRegion',
+    label: 'Last Seen Region',
+    type: 'string',
+    input: 'select',
+    values: [
+        "Aridia",
+        "Black Rise",
+        "Branch",
+        "Cache",
+        "Catch",
+        "Cloud Ring",
+        "Cobalt Edge",
+        "Curse",
+        "Deklein",
+        "Delve",
+        "Derelik",
+        "Detorid",
+        "Devoid",
+        "Domain",
+        "Esoteria",
+        "Essence",
+        "Etherium Reach",
+        "Everyshore",
+        "Fade",
+        "Feythabolis",
+        "Fountain",
+        "Geminate",
+        "Genesis",
+        "Great Wildlands",
+        "Heimatar",
+        "Immensea",
+        "Impass",
+        "Insmother",
+        "Kador",
+        "Khanid",
+        "Kor-Azor",
+        "Lonetrek",
+        "Malpais",
+        "Metropolis",
+        "Molden Heath",
+        "Oasa",
+        "Omist",
+        "Outer Passage",
+        "Outer Ring",
+        "Paragon Soul",
+        "Period Basis",
+        "Perrigen Falls",
+        "Placid",
+        "Providence",
+        "Pure Blind",
+        "Querious",
+        "Scalding Pass",
+        "Sinq Laison",
+        "Solitude",
+        "Stain",
+        "Syndicate",
+        "Tash-Murkon",
+        "Tenal",
+        "Tenerifis",
+        "The Bleak Lands",
+        "The Citadel",
+        "The Forge",
+        "The Kalevala Expanse",
+        "The Spire",
+        "Tribute",
+        "Vale of the Silent",
+        "Venal",
+        "Verge Vendor",
+        "Wicked Creek"
+    ],
+    color: 'primary',
+    operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
+  }, {
+    id: 'lastSeenDate',
+    label: 'Last Seen Date',
+    type: 'date',
+    validation: {
+      format: 'YYYY-MM-DD'
+    },
+    plugin: 'datepicker',
+    plugin_config: {
+      format: 'yyyy-mm-dd',
+      todayBtn: 'linked',
+      todayHighlight: true,
+      autoclose: true
+    }
+  }],
+
+  rules: rules_plugins
+});
+
+$('.parse-mongo').on('click', function() {
+  var res = $('#builder').queryBuilder('getMongo');
+  window.location = "/search?query="+JSON.stringify(res);
+});
+
+    </script>
+    </body>
+</html>
